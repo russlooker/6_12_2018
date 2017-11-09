@@ -16,6 +16,7 @@ datagroup: order_items {
 
 
 explore: order_items {
+  sql_always_where: ${status}="Complete" ;;
   persist_with: order_items
   join: users {
     type: left_outer
