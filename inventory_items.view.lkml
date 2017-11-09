@@ -2,6 +2,7 @@ view: inventory_items {
   sql_table_name: public.inventory_items ;;
 
   dimension: id {
+    hidden:  yes
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
@@ -9,6 +10,7 @@ view: inventory_items {
 
   dimension: cost {
     type: number
+    value_format_name: usd
     sql: ${TABLE}.cost ;;
   }
 
@@ -42,13 +44,14 @@ view: inventory_items {
   }
 
   dimension: product_distribution_center_id {
+    hidden:  yes
     type: number
     sql: ${TABLE}.product_distribution_center_id ;;
   }
 
   dimension: product_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.product_id ;;
   }
 
@@ -59,6 +62,7 @@ view: inventory_items {
 
   dimension: product_retail_price {
     type: number
+    value_format_name: usd
     sql: ${TABLE}.product_retail_price ;;
   }
 
