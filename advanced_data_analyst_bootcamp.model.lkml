@@ -16,6 +16,8 @@ datagroup: order_items {
 
 
 explore: order_items {
+  sql_always_where: ${status} = "complete";;
+
   persist_with: order_items
   join: users {
     type: left_outer
@@ -64,9 +66,9 @@ explore: inventory_items {
   }
 }
 
-explore: users {
-  access_filter: {
-    field: users.email
-    user_attribute: email
-  }
-}
+#explore: users {
+#  access_filter: {
+#    field: users.email
+#    user_attribute: email
+#  }
+#}
