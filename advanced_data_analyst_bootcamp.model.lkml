@@ -7,6 +7,11 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+datagroup: default {
+  sql_trigger: select current_date ;;
+  max_cache_age: "24 hours"
+}
+
 datagroup: order_items {
   sql_trigger: select max(created_at) from order_items ;;
   max_cache_age: "4 hours"
