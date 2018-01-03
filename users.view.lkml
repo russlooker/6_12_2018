@@ -74,6 +74,24 @@ view: users {
     sql: ${TABLE}.zip ;;
   }
 
+  dimension: latitude {
+    hidden:  yes
+    type: number
+    sql: ${TABLE}.latitude ;;
+  }
+
+  dimension: longitude {
+    hidden:  yes
+    type: number
+    sql: ${TABLE}.longitude ;;
+  }
+
+  dimension: map_location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
+  }
+
   dimension: region {
 #     map_layer_name: map_regions
     sql: CASE WHEN ${state} = 'Maine' THEN 'Northeast'
@@ -165,23 +183,5 @@ view: users {
   dimension: name {
     type: string
     sql: ${first_name} || ' ' || ${last_name} ;;
-  }
-
-  dimension: latitude {
-    hidden:  yes
-    type: number
-    sql: ${TABLE}.latitude ;;
-  }
-
-  dimension: longitude {
-    hidden:  yes
-    type: number
-    sql: ${TABLE}.longitude ;;
-  }
-
-  dimension: map_location {
-    type: location
-    sql_latitude: ${latitude} ;;
-    sql_longitude: ${longitude} ;;
   }
 }
