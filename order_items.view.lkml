@@ -155,6 +155,12 @@ view: order_items {
     value_format_name: usd
   }
 
+  measure: profit_margin {
+    type: number
+    sql: ${total_profit}/NULLIF(${total_revenue}, 0) ;;
+    value_format_name: percent_2
+  }
+
   measure: average_shipping_time {
     type: average
     sql: ${shipping_time} ;;
