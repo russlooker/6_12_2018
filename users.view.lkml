@@ -52,44 +52,12 @@ view: users {
     sql: DATEDIFF(year, ${created_date}, current_date) ;;
   }
 
-  dimension: email {
-    type: string
-    sql: ${TABLE}.email ;;
-  }
-
-  dimension: first_name {
-    hidden:  yes
-    type: string
-    sql: ${TABLE}.first_name ;;
-  }
-
   dimension: gender {
     type: string
     sql: ${TABLE}.gender ;;
   }
 
-  dimension: last_name {
-    hidden:  yes
-    type: string
-    sql: ${TABLE}.last_name ;;
-  }
 
-  dimension: name {
-    type: string
-    sql: ${first_name} || ' ' || ${last_name} ;;
-  }
-
-  dimension: latitude {
-    hidden:  yes
-    type: number
-    sql: ${TABLE}.latitude ;;
-  }
-
-  dimension: longitude {
-    hidden:  yes
-    type: number
-    sql: ${TABLE}.longitude ;;
-  }
 
   dimension: state {
     type: string
@@ -161,11 +129,6 @@ view: users {
               ELSE 'Outside US'
           END ;;
   }
-  dimension: map_location {
-    type: location
-    sql_latitude: ${latitude} ;;
-    sql_longitude: ${longitude} ;;
-  }
 
   measure: max_age {
     type: max
@@ -180,5 +143,45 @@ view: users {
   measure: count {
     type: count
     drill_fields: [id, first_name, last_name, events.count, order_items.count]
+  }
+
+  dimension: email {
+    type: string
+    sql: ${TABLE}.email ;;
+  }
+
+  dimension: first_name {
+    hidden:  yes
+    type: string
+    sql: ${TABLE}.first_name ;;
+  }
+
+  dimension: last_name {
+    hidden:  yes
+    type: string
+    sql: ${TABLE}.last_name ;;
+  }
+
+  dimension: name {
+    type: string
+    sql: ${first_name} || ' ' || ${last_name} ;;
+  }
+
+  dimension: latitude {
+    hidden:  yes
+    type: number
+    sql: ${TABLE}.latitude ;;
+  }
+
+  dimension: longitude {
+    hidden:  yes
+    type: number
+    sql: ${TABLE}.longitude ;;
+  }
+
+  dimension: map_location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
   }
 }
