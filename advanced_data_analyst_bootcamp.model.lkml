@@ -1,5 +1,8 @@
 connection: "events_ecommerce"
 persist_with: order_items
+datagroup: every_4_hrs {
+  sql_trigger: SELECT FLOOR(EXTRACT(epoch from GETDATE()) / (4*60*60)) ;;
+}
 
 # include all the views
 include: "*.view"
@@ -21,6 +24,13 @@ datagroup: order_items {
 
 
 explore: order_items {
+
+  #sql_always_where:${order_items.status} != 'Returned';;
+  #sql_always_having: ${order_items.total_revenue} > 200 ;;
+
+
+
+
   persist_with: order_items
   join: users {
     type: left_outer
@@ -70,6 +80,14 @@ explore: inventory_items {
 }
 
 explore: users {
+
+persist_with: every_4_hrs
+
+access_filter: {
+  field: users.state
+  user_attribute: user_state
+}
+
   join: order_items {
     type: left_outer
     sql_on: ${users.id} = ${order_items.user_id} ;;
@@ -79,5 +97,11 @@ explore: users {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
     relationship: many_to_one
+  }
+
+  join: user_order_facts {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${users.id}=${user_order_facts.userid} ;;
   }
 }
