@@ -2,7 +2,7 @@ view: users {
   sql_table_name: public.users ;;
 
   dimension: id {
-    hidden:  yes
+#     hidden:  yes
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
