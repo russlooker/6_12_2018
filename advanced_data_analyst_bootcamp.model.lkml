@@ -81,22 +81,4 @@ explore: users {
     relationship: many_to_one
   }
 
-  join: user_summary {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${users.id}=${user_summary.user_id} ;;
-  }
-
-  join: user_summary_native {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${users.email}=${user_summary_native.email} ;;
-  }
-
-  join: order_facts {
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${order_items.order_id}=${order_facts.order_id} ;;
-  }
-
 }
