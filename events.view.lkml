@@ -3,6 +3,7 @@ view: events {
 
   dimension: id {
     primary_key: yes
+    hidden: yes
     type: number
     sql: ${TABLE}.id ;;
   }
@@ -48,13 +49,21 @@ view: events {
   }
 
   dimension: latitude {
+    hidden: yes
     type: number
     sql: ${TABLE}.latitude ;;
   }
 
   dimension: longitude {
+    hidden: yes
     type: number
     sql: ${TABLE}.longitude ;;
+  }
+
+  dimension: location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
   }
 
   dimension: os {
@@ -74,6 +83,7 @@ view: events {
 
   dimension: state {
     type: string
+    map_layer_name: us_states
     sql: ${TABLE}.state ;;
   }
 
@@ -95,6 +105,7 @@ view: events {
 
   dimension: zip {
     type: zipcode
+    map_layer_name: us_zipcode_tabulation_areas
     sql: ${TABLE}.zip ;;
   }
 
