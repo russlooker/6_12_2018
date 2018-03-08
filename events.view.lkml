@@ -8,6 +8,11 @@ view: events {
     sql: ${TABLE}.id ;;
   }
 
+  dimension: user_identifier {
+    type: string
+    sql: COALESCE(${user_id}::varchar, ${ip_address}) ;;
+  }
+
   dimension: browser {
     type: string
     sql: ${TABLE}.browser ;;
@@ -112,5 +117,10 @@ view: events {
   measure: count {
     type: count
     drill_fields: [id, users.id, users.first_name, users.last_name]
+  }
+
+  measure: count_distinct_user_identifiers {
+    type: count_distinct
+    sql: ${user_identifier} ;;
   }
 }
