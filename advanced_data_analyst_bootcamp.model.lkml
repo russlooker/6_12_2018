@@ -12,6 +12,11 @@ datagroup: default {
   max_cache_age: "24 hours"
 }
 
+datagroup: order_items {
+  sql_trigger: SELECT MAX(created_at) FROM order_items ;;
+  max_cache_age: "4 hours"
+}
+
 
 
 explore: order_items {

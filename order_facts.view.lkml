@@ -4,6 +4,7 @@
 
 view: order_facts {
   derived_table: {
+    datagroup_trigger: order_items
     explore_source: order_items {
       column: order_id {}
       column: order_item_count {}
