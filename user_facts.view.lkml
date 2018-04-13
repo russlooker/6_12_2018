@@ -2,7 +2,7 @@ view: user_facts {
   derived_table: {
     sql: SELECT
         user_id,
-        COUNT(DISTINCT order_id) AS liftime_order_count,
+        COUNT(DISTINCT order_id) AS lifetime_order_count,
         SUM(sale_price) AS lifetime_revenue,
         MIN(NULLIF(created_at, 0)) AS first_order_date,
         MAX(NULLIF(created_at, 0)) AS latest_order_date
@@ -16,9 +16,9 @@ view: user_facts {
     sql: ${TABLE}.user_id ;;
   }
 
-  dimension: liftime_order_count {
+  dimension: lifetime_order_count {
     type: number
-    sql: ${TABLE}.liftime_order_count ;;
+    sql: ${TABLE}.lifetime_order_count ;;
   }
 
   dimension: lifetime_revenue {
@@ -36,17 +36,17 @@ view: user_facts {
     sql: ${TABLE}.latest_order_date ;;
   }
 
-  measure: avg_liftime_orders {
+  measure: avg_lifetime_orders {
     type: average
-    sql: ${lifetime_revenue} ;;
+    sql: ${lifetime_order_count} ;;
   }
 
-  measure: avg_liftetime_revenue {
+  measure: avg_lifetime_revenue {
     type: average
-    sql: ${avg_liftetime_revenue} ;;
+    sql: ${avg_lifetime_revenue} ;;
   }
 
   set: detail {
-    fields: [user_id, liftime_order_count, lifetime_revenue, first_order_date_time, latest_order_date_time]
+    fields: [user_id, lifetime_order_count, lifetime_revenue, first_order_date_time, latest_order_date_time]
   }
 }
