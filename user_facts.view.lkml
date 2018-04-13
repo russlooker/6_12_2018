@@ -11,11 +11,6 @@ view: user_facts {
  ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
-
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
