@@ -12,6 +12,7 @@ view: user_facts {
   }
 
   dimension: user_id {
+    primary_key: yes
     type: number
     sql: ${TABLE}.user_id ;;
   }
@@ -43,7 +44,7 @@ view: user_facts {
 
   measure: avg_lifetime_revenue {
     type: average
-    sql: ${avg_lifetime_revenue} ;;
+    sql: ${lifetime_revenue} ;;
   }
 
   set: detail {
