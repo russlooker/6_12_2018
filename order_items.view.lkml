@@ -1,6 +1,25 @@
 view: order_items {
   sql_table_name: public.order_items ;;
 
+  parameter: select_measure_parameter {
+    description: "Select a measure to use"
+    label: "Select Measure"
+    type: string
+    default_value: "Total Revenue"
+    allowed_value: {
+      label: "Total Revenue"
+      value: "Total Revenue"
+    }
+    allowed_value: {
+      label: "Order Count"
+      value: "Order Count"
+    }
+    allowed_value: {
+      label: "Avg Sales Price"
+      value: "Avg Sales Price"
+    }
+  }
+
   dimension: id {
     hidden:  yes
     primary_key: yes
@@ -165,6 +184,18 @@ view: order_items {
     type: average
     sql: ${shipping_time} ;;
     value_format: "0\" days\""
+  }
+
+  measure: selected_measure {
+    description: "Choose a measure and show that selection"
+    label_from_parameter: select_measure_parameter
+    type: number
+    sql: case
+      when {% parameter select_measure_parameter %} = 'Total Revenue' then ${total_revenue}
+      when {% parameter select_measure_parameter %} = 'Order Count' then ${order_count}
+      when {% parameter select_measure_parameter %} = 'Avg Sales Price' then ${average_sale_price}
+      end
+    ;;
   }
 
 
