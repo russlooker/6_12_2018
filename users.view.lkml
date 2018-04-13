@@ -162,26 +162,4 @@ view: users {
     type: count
     drill_fields: [id, events.count, order_items.count]
   }
-
-  dimension: email {
-    type: string
-    sql: ${TABLE}.email ;;
-  }
-
-  dimension: first_name {
-    hidden:  yes
-    type: string
-    sql: ${TABLE}.first_name ;;
-  }
-
-  dimension: last_name {
-    hidden:  yes
-    type: string
-    sql: ${TABLE}.last_name ;;
-  }
-
-  dimension: name {
-    type: string
-    sql: ${first_name} || ' ' || ${last_name} ;;
-  }
 }
