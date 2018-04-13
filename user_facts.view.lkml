@@ -41,6 +41,11 @@ view: user_facts {
     sql: ${lifetime_revenue} ;;
   }
 
+  measure: avg_liftetime_revenue {
+    type: average
+    sql: ${avg_liftetime_revenue} ;;
+  }
+
   set: detail {
     fields: [user_id, liftime_order_count, lifetime_revenue, first_order_date_time, latest_order_date_time]
   }
