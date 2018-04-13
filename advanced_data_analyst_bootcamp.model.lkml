@@ -100,3 +100,9 @@ explore: users {
     relationship: one_to_one
   }
 }
+
+explore: users_advanced {
+  extends: [users]
+  from: users_ext
+  view_name: users
+}
