@@ -20,13 +20,6 @@ view: order_items {
     }
   }
 
-  filter: select_brand_filter {
-    label: "Select Brand"
-    type: string
-    suggest_dimension: products.brand
-    suggest_explore: order_items
-  }
-
   dimension: id {
     hidden:  yes
     primary_key: yes

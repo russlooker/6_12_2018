@@ -1,6 +1,13 @@
 view: products {
   sql_table_name: public.products ;;
 
+  filter: select_brand_filter {
+    label: "Select Brand"
+    type: string
+    suggest_dimension: products.brand
+    suggest_explore: order_items
+  }
+
   dimension: id {
     hidden:  yes
     primary_key: yes
@@ -48,6 +55,16 @@ view: products {
   dimension: sku {
     type: string
     sql: ${TABLE}.sku ;;
+  }
+
+  dimension: brand_compare {
+    description: "Select a brand to compare to all other brands"
+    type: string
+    sql: CASE
+      WHEN {% condition select_brand_filter %}${brand}{% endcondition %} THEN ${brand}
+      ELSE 'Rest of Population'
+      END
+    ;;
   }
 
   measure: count {
