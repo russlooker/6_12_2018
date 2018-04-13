@@ -20,6 +20,13 @@ view: order_items {
     }
   }
 
+  filter: select_brand_filter {
+    label: "Select Brand"
+    type: string
+    suggest_dimension: products.brand
+    suggest_explore: order_items
+  }
+
   dimension: id {
     hidden:  yes
     primary_key: yes
@@ -196,6 +203,11 @@ view: order_items {
       when {% parameter select_measure_parameter %} = 'Avg Sales Price' then ${average_sale_price}
       end
     ;;
+  }
+
+  measure: selected_brand {
+    description: "Choose a brand"
+
   }
 
 
