@@ -179,4 +179,10 @@ view: order_items {
       inventory_items.product_name
     ]
   }
+
+  #2
+  dimension: shipping_days {
+    type: number
+    sql: datediff('day',${shipped_date},${delivered_date}) ;;
+  }
 }

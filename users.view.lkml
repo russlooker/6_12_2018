@@ -69,6 +69,7 @@ view: users {
     sql: ${TABLE}.traffic_source ;;
   }
 
+
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
@@ -180,8 +181,59 @@ view: users {
     sql: ${TABLE}.last_name ;;
   }
 
+  dimension: days_since_signup_tier {
+    type:  tier
+    sql: ${days_since_signup} ;;
+    tiers: [30,60,90,180,360,720,1000]
+    style: integer
+  }
+
+  dimension: location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
+  }
+
+  dimension: is_new_user {
+    type: yesno
+    sql: ${days_since_signup} <= 90 ;;
+
+}
+
+  dimension: days_since_signup {
+    type: number
+    sql: datediff('day',${created_date}, current_date) ;;
+
+  }
+
+  dimension: full_name {
+    type: string
+    sql: ${first_name} || ' ' || ${last_name} ;;
+
+  }
+
   dimension: name {
     type: string
     sql: ${first_name} || ' ' || ${last_name} ;;
+  }
+
+  #1
+  dimension: city_and_state {
+    type: string
+    sql: ${city} || ', ' || ${state} ;;
+  }
+
+  #another question
+  dimension: age_tiers {
+    type: tier
+    sql: ${age} ;;
+    tiers: [18,25,35,45,55,65,75,90]
+    style: integer
+  }
+
+  #3
+  dimension: is_email {
+    type: yesno
+    sql: LOWER(${traffic_source}) = 'email';;
   }
 }
